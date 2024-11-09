@@ -11,6 +11,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'alunos',
+    loadChildren: () => import('./tabs/alunos/alunos.module').then( m => m.AlunosPageModule)
+  },
 ];
 
 @NgModule({
