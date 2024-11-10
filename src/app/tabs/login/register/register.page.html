@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Login</ion-title>
+    <ion-title>register</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -13,7 +13,7 @@
   <div>
     <div class="ion-text-center">
       <ion-title class="ion-padding">Bem Vindo</ion-title>
-      <p>Faça Login para acessar sua conta</p>
+      <p>Cadastre-se para acessar sua conta</p>
     </div>
 
     <ion-card class="ion-padding">
@@ -25,7 +25,7 @@
             name="email"
             label="Email"
             labelPlacement="floating"
-            placeholder="Insira seu email"
+            placeholder="Insira um email válido"
             type="email"
             required
           ></ion-input>
@@ -46,20 +46,15 @@
           ></ion-input>
         </ion-item>
 
-        <div class="ion-text-center ion-margin-top">
-          <a [routerLink]="['/reset-password']" >Esqueceu a senha?</a>
-        </div>
-
         <ion-button expand="block" class="ion-padding" >
-          Entrar
+          Cadastrar
         </ion-button>
 
         <div class="ion-text-center">
-          <p>Primeiro acesso? <a [routerLink]="['/login', 'register']">Cadastre-se</a></p>
+          <p>Já é um usuário? <a [routerLink]="['/login']">Login</a></p>
         </div>
 
       </form>
     </ion-card>
   </div>
-
 </ion-content>
