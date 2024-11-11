@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
@@ -13,7 +13,8 @@ import { InformacoesPage } from './informacoes.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    InformacoesPageRoutingModule
+    InformacoesPageRoutingModule,
+    NgOptimizedImage
   ],
   declarations: [InformacoesPage]
 })
