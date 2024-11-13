@@ -9,10 +9,19 @@ import { AppRoutingModule } from './app-routing.module';
 import {provideHttpClient, withFetch, withInterceptorsFromDi} from "@angular/common/http";
 import {HTTP} from "@awesome-cordova-plugins/http/ngx";
 import {HttpService} from "./services/http.service";
+import { AngularFireModule } from "@angular/fire/compat";
+import {firebaseConfig} from "../environments/environment";
+
+
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    AngularFireModule.initializeApp(firebaseConfig)
+  ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

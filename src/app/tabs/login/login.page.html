@@ -28,6 +28,7 @@
             placeholder="Insira seu email"
             type="email"
             required
+            [(ngModel)]="email"
           ></ion-input>
         </ion-item>
 
@@ -43,6 +44,7 @@
             placeholder="Insira sua senha"
             type="password"
             required
+            [(ngModel)]="password"
           ></ion-input>
         </ion-item>
 
@@ -50,12 +52,12 @@
           <a [routerLink]="['/reset-password']" >Esqueceu a senha?</a>
         </div>
 
-        <ion-button expand="block" class="ion-padding" >
+        <ion-button expand="block" class="ion-padding" (click)="login()">
           Entrar
         </ion-button>
 
         <div class="ion-text-center">
-          <p>Primeiro acesso? <a [routerLink]="['/login', 'register']">Cadastre-se</a></p>
+          <p>Primeiro acesso? <a [routerLink]="['/login', 'register']" >Cadastre-se</a></p>
         </div>
 
       </form>
