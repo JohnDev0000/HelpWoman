@@ -1,37 +1,35 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {forkJoin, Observable} from "rxjs";
+import {HTTP} from '@awesome-cordova-plugins/http/ngx';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
 
-  proxyUrl = 'https://cors-anywhere.herokuapp.com';
   apiUrl = 'https://www.ipea.gov.br/atlasviolencia/api/v1';
 
-  constructor(private http: HttpClient) {
+  constructor(private httpCapPlugin: HTTP, private http: HttpClient) {
   }
 
-  getTemas(): Observable<any> {
-    // return this.http.get('https://cors-anywhere.herokuapp.com/https://www.ipea.gov.br/atlasviolencia/api/v1/temas');
-    return this.http.get(`https://www.ipea.gov.br/atlasviolencia/api/v1/temas`);
-    // return this.http.get(`${this.proxyUrl}/${this.apiUrl}/tema/1`);
-    // return this.http.get(`${this.proxyUrl}/tema/1`);
+  async getTemas(): Promise<any> {
+    try {
+      const response = await this.httpCapPlugin.get(`${this.apiUrl}/temas`, {}, {});
+      return JSON.parse(response.data);
+    } catch (error) {
+      console.error('Erro ao carregar dados:', error);
+      throw error;
+    }
   }
 
-  getSeries(): Observable<any> {
-    return this.http.get(`/api/series`);
-    // return forkJoin({
-    //   serie40: this.http.get(`${this.ipeaApiUrl}/serie/40`),
-    //   serie271: this.http.get(`${this.ipeaApiUrl}/serie/271`),
-    //   serie317: this.http.get(`${this.ipeaApiUrl}/serie/317`),
-    //   serie333: this.http.get(`${this.ipeaApiUrl}/serie/333`),
-    // });
+  getTema(): Observable<any> {
+    const url = `${this.apiUrl}/temas`;
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    return this.http.get(url, { headers: new HttpHeaders(headers) });
   }
 
-  getRequest() {
-
-  }
 
 }

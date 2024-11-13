@@ -9,6 +9,9 @@ import {HttpService} from "../../services/http.service";
 })
 export class InformacoesPage {
   public infoData: string | undefined;
+  isLoading: boolean = false;
+  errorMessage: string | null = null;
+  temas: any[] = [];
 
   ionViewDidEnter() {
     this.loadApiResponse();
@@ -17,19 +20,16 @@ export class InformacoesPage {
   constructor(private api: HttpService) {
   }
 
-  public loadApiResponse() {
-    this.api.getTemas().subscribe({
-      next: (data: any) => {
-        console.log('Dados: ', data)
-        this.infoData = data.message;
+  loadApiResponse() {
+    this.api.getTema().subscribe({
+      next: (data) => {
+        this.temas = data;
+        console.log('Dados carregados com sucesso:', this.temas);
       },
-      error: (error: any) => {
-        console.error('There was an error!', error);
-      },
-      complete: () => {
-        console.log('Completed');
+      error: (error) => {
+        console.error('Erro ao carregar temas:', error);
       }
-    })
+    });
   }
 
 }
