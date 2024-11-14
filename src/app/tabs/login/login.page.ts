@@ -2,50 +2,35 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {FireserviceService} from "../../services/fireservice.service";
 
+export interface User {
+  email: string;
+  password: string;
+}
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  public email: any;
-  public password: any;
+  user = {} as User;
 
-  constructor(public fireService: FireserviceService) {
+  constructor(public fireService: FireserviceService, private router: Router) {
   }
 
   ngOnInit() {
   }
 
-  login() {
-    if (this.email && this.password) {
-      this.fireService.loginEmail({ email: this.email, password: this.password })
-        .then((res) => {
-          console.log('Login Response:', res);
-
-          const userId = res.user?.uid;
-          if (userId) {
-            this.fireService.getUserDetails(userId).subscribe({
-              next: (userDetails) => {
-                if (userDetails && userDetails.name) {
-                  alert('Bem-vindo ' + userDetails.name);
-                } else {
-                  alert('Usuário não encontrado no banco de dados');
-                }
-                console.log('Detalhes do Usuário:', userDetails);
-              },
-              error: (err) => {
-                console.error('Erro ao obter detalhes do usuário:', err);
-              }
-            });
-          }
-        })
-        .catch((err) => {
-          console.error('Erro no Login:', err);
-          alert('Erro no login: ' + err.message);
-        });
-    } else {
-      alert('Por favor, preencha o email e a senha.');
+  async login(user: User) {
+    try {
+      const result = await this.fireService.auth.signInWithEmailAndPassword(user.email, user.password);
+      if (result) {
+        alert('Usuário logado com sucesso');
+        await this.router.navigate(['/home']);
+      }
+    } catch (e) {
+      alert('Usuário ou senha inválidos');
+      console.error(e);
     }
   }
 

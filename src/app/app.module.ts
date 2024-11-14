@@ -11,6 +11,7 @@ import {HTTP} from "@awesome-cordova-plugins/http/ngx";
 import {HttpService} from "./services/http.service";
 import { AngularFireModule } from "@angular/fire/compat";
 import {firebaseConfig} from "../environments/environment";
+import {provideAuth} from "@angular/fire/auth";
 
 
 
@@ -26,7 +27,7 @@ import {firebaseConfig} from "../environments/environment";
     provideHttpClient(withInterceptorsFromDi()),
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     HTTP,
-    HttpService
+    HttpService,
   ],
   bootstrap: [AppComponent],
 })

@@ -1,18 +1,17 @@
 import { Injectable } from '@angular/core';
-import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {Observable} from "rxjs";
+import {AngularFirestore} from "@angular/fire/compat/firestore";
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class FireserviceService {
 
-  constructor(public firestore: AngularFirestore, public auth: AngularFireAuth) { }
+  constructor(public auth: AngularFireAuth, public firestore: AngularFirestore) { }
 
-  loginEmail(data: { email: string; password: string; }) {
-    return this.auth.signInWithEmailAndPassword(data.email, data.password);
-  }
 
   signup(data: { email: string; password: string; }) {
     return this.auth.createUserWithEmailAndPassword(data.email, data.password);

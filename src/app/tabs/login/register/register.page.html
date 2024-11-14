@@ -27,6 +27,7 @@
             labelPlacement="floating"
             placeholder="Insira um email válido"
             type="email"
+            [(ngModel)]="user.email"
             required
           ></ion-input>
         </ion-item>
@@ -42,11 +43,12 @@
             labelPlacement="floating"
             placeholder="Insira sua senha"
             type="password"
+            [(ngModel)]="user.password"
             required
           ></ion-input>
         </ion-item>
 
-        <ion-button expand="block" class="ion-padding" >
+        <ion-button expand="block" class="ion-padding" (click)="register(user)">
           Cadastrar
         </ion-button>
 
