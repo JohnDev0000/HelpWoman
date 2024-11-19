@@ -7,8 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DarkToggleComponent  implements OnInit {
   paletteToggle = false;
-  darkMode= false;
-
   constructor() { }
 
   ngOnInit() {

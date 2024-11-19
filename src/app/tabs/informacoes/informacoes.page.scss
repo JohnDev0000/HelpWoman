@@ -1,0 +1,17 @@
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 1rem;
+}
+
+.error, .no-results {
+  color: red;
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 1rem;
+}
+
+ion-thumbnail img {
+  object-fit: cover;
+}
+

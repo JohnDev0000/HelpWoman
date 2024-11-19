@@ -8,28 +8,37 @@ import {HttpService} from "../../services/http.service";
   styleUrls: ['./informacoes.page.scss'],
 })
 export class InformacoesPage {
-  public infoData: string | undefined;
-  isLoading: boolean = false;
-  errorMessage: string | null = null;
-  temas: any[] = [];
+  query: string = '';
+  articles: any[] = [];
+  loading = false;
+  error: string | null = null;
+  searchAttempted: boolean = false;
 
-  ionViewDidEnter() {
-    this.loadApiResponse();
+  constructor(private newsService: HttpService) {
   }
 
-  constructor(private api: HttpService) {
-  }
+  fetchNews(query: string) {
+    if (!query.trim()) return;
 
-  loadApiResponse() {
-    this.api.getTema().subscribe({
+    this.loading = true;
+    this.error = null;
+    this.searchAttempted = true;
+
+    this.newsService.getTopHeadlines(this.query).subscribe({
       next: (data) => {
-        this.temas = data;
-        console.log('Dados carregados com sucesso:', this.temas);
+        this.articles = data.articles;
+        this.loading = false;
       },
-      error: (error) => {
-        console.error('Erro ao carregar temas:', error);
+      error: (err) => {
+        this.error = err.message;
+        this.loading = false;
+        console.log(err);
       }
     });
+  }
+
+  openArticle(url: string) {
+    window.open(url, '_blank');
   }
 
 }

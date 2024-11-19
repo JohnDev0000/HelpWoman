@@ -8,21 +8,54 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Informacoes</ion-title>
     </ion-toolbar>
   </ion-header>
 
+  <strong>Pesquisar Notícias</strong>
+  <ion-icon name="search-sharp" class="ion-padding-start"></ion-icon>
+  <p></p>
+
+  <ion-item>
+    <div class="container">
+
+      <div class="row">
+        <div class="col">
+          <ion-input [(ngModel)]="query" placeholder="Digite um termo"></ion-input>
+        </div>
+        <div class="col text-end align-content-center">
+          <ion-button (click)="fetchNews(query)" style="--background: #8e44ad">Pesquisar</ion-button>
+        </div>
+      </div>
+    </div>
+  </ion-item>
 
 
+  <div *ngIf="loading" class="ion-text-center">
+    <p></p>
+    <ion-spinner></ion-spinner>
+    <p>Carregando notícias...</p>
+  </div>
+  <div *ngIf="searchAttempted && !loading && articles.length === 0" class="no-results">
+    Nenhuma notícia encontrada
+  </div>
+  <div *ngIf="error" class="error">{{ error }}</div>
 
-<!--  <ion-card>-->
-<!--    <img [src]="dogImageUrl"/>-->
-<!--    <ion-card-header>-->
-<!--      <ion-card-title>Cachorro lindo</ion-card-title>-->
-<!--    </ion-card-header>-->
-<!--  </ion-card>-->
+
+  <ion-list *ngIf="articles.length > 0">
+    <ion-item *ngFor="let article of articles">
+      <ion-thumbnail slot="start">
+        <img [src]="article.urlToImage" alt="No image available">
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ article.title }}</h2>
+        <p>{{ article.description }}</p>
+      </ion-label>
+      <ion-button slot="end" fill="clear" (click)="openArticle(article.url)">Leia mais</ion-button>
+    </ion-item>
+  </ion-list>
 
 </ion-content>

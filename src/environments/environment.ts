@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  newsApiKey: 'efcab59065dc4691accae672c4157461'
 };
 
 export const firebaseConfig = {

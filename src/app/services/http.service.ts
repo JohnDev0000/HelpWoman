@@ -1,35 +1,24 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {forkJoin, Observable} from "rxjs";
 import {HTTP} from '@awesome-cordova-plugins/http/ngx';
+import {Observable} from "rxjs";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
 
-  apiUrl = 'https://www.ipea.gov.br/atlasviolencia/api/v1';
+  private apiUrl = 'https://newsapi.org/v2';
 
   constructor(private httpCapPlugin: HTTP, private http: HttpClient) {
   }
 
-  async getTemas(): Promise<any> {
-    try {
-      const response = await this.httpCapPlugin.get(`${this.apiUrl}/temas`, {}, {});
-      return JSON.parse(response.data);
-    } catch (error) {
-      console.error('Erro ao carregar dados:', error);
-      throw error;
-    }
-  }
+  getTopHeadlines(query: string, language = 'pt'): Observable<any> {
+    const url = `${this.apiUrl}/everything?q=${query}&language=${language}`;
+    const headers = new HttpHeaders().set('X-Api-Key', environment.newsApiKey);
 
-  getTema(): Observable<any> {
-    const url = `${this.apiUrl}/temas`;
-    const headers = {
-      'Content-Type': 'application/json',
-    };
-    return this.http.get(url, { headers: new HttpHeaders(headers) });
+    return this.http.get(url, { headers });
   }
-
 
 }

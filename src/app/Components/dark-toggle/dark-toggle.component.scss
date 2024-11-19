@@ -14,3 +14,10 @@
 ion-toggle {
   flex-shrink: 0;
 }
+
+.custom-toggle {
+  --handle-background: #8e44ad;
+  --background-checked: rgba(142, 68, 173, 0.5);
+  --handle-background-checked: #8e44ad;
+  --background: rgba(0, 0, 0, 0.2);
+}
