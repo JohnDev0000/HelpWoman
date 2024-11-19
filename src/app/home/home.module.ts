@@ -6,6 +6,8 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import {TabsComponent} from "../tabs/tabs.component";
+import {DarkToggleComponent} from "../Components/dark-toggle/dark-toggle.component";
+import {ModalComponent} from "../Components/modal/modal.component";
 
 
 @NgModule({
@@ -15,6 +17,6 @@ import {TabsComponent} from "../tabs/tabs.component";
         IonicModule,
         HomePageRoutingModule,
     ],
-  declarations: [HomePage, TabsComponent]
+  declarations: [HomePage, TabsComponent, DarkToggleComponent, ModalComponent]
 })
 export class HomePageModule {}

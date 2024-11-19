@@ -1,0 +1,16 @@
+.dark-mode-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+
+.label-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+ion-toggle {
+  flex-shrink: 0;
+}

@@ -1,0 +1,24 @@
+
+<ion-icon name="menu" (click)="setOpen(true)" style="zoom:2.5"></ion-icon>
+<ion-modal [isOpen]="isModalOpen">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar class="custom-toolbar">
+        <ion-title>Menu</ion-title>
+        <ion-buttons slot="end">
+          <ion-icon
+            name="close"
+            class="close-icon"
+            (click)="setOpen(false)"
+            style="zoom: 2">
+          </ion-icon>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content id="container" class="ion-padding">
+      <br>
+      <app-dark-toggle></app-dark-toggle>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
