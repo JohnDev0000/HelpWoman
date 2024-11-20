@@ -1,5 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import {HttpService} from "../../services/http.service";
 
 @Component({
@@ -13,6 +12,8 @@ export class InformacoesPage {
   loading = false;
   error: string | null = null;
   searchAttempted: boolean = false;
+  headlines: any[] = [];
+  filters: { country?: string; category?: string; q?: string } = {};
 
   constructor(private newsService: HttpService) {
   }
@@ -24,13 +25,30 @@ export class InformacoesPage {
     this.error = null;
     this.searchAttempted = true;
 
-    this.newsService.getTopHeadlines(this.query).subscribe({
+    this.newsService.getEverything(this.query).subscribe({
       next: (data) => {
         this.articles = data.articles;
         this.loading = false;
       },
       error: (err) => {
-        this.error = err.message;
+        this.error = 'Erro ao buscar notícias';
+        this.loading = false;
+      }
+    });
+  }
+
+  fetchHeadlines() {
+    this.loading = true;
+    this.error = null;
+    this.searchAttempted = true;
+
+    this.newsService.getTopHeadlines(this.filters).subscribe({
+      next: (data) => {
+        this.headlines = data.articles || [];
+        this.loading = false;
+      },
+      error: (err) => {
+        this.error = 'Erro ao buscar notícias, verifique os filtros de pesquisa';
         this.loading = false;
         console.log(err);
       }
@@ -39,6 +57,25 @@ export class InformacoesPage {
 
   openArticle(url: string) {
     window.open(url, '_blank');
+  }
+
+  clearSearch() {
+    this.filters = {
+      country: '',
+      category: '',
+      q: '',
+    };
+    this.query = '';
+    this.articles = [];
+    this.headlines = [];
+    this.error = null;
+    this.searchAttempted = false;
+  }
+
+  // Não Funciona????
+  scrollToTop() {
+    console.log("Scrolling to top");
+    window.scrollTo({ top: 1, left: 1, behavior: 'smooth' });
   }
 
 }
