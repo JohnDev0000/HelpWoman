@@ -15,9 +15,19 @@
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
-    <ion-content id="container" class="ion-padding">
+    <ion-content>
       <br>
-      <app-dark-toggle></app-dark-toggle>
+      <div class="dark-mode-container">
+        <div class="label-container">
+          <ion-icon [name]="paletteToggle ? 'moon' : 'sunny'" class="icon-large"></ion-icon>
+          <span style="font-size: 20px">
+            {{ paletteToggle ? 'Modo Escuro' : 'Modo Claro' }}
+          </span>
+        </div>
+        <ion-toggle [(ngModel)]="paletteToggle" (ionChange)="toggleChange($event)" class="custom-toggle"></ion-toggle>
+      </div>
+
+      <!--      <app-dark-toggle></app-dark-toggle>-->
     </ion-content>
   </ng-template>
 </ion-modal>

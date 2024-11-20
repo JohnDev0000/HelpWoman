@@ -1,6 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {IonModal} from "@ionic/angular";
-import {set} from "@angular/fire/database";
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-modal',
@@ -9,12 +7,31 @@ import {set} from "@angular/fire/database";
 })
 export class ModalComponent {
   isModalOpen = false;
+  paletteToggle = false;
 
-  constructor() { }
+  constructor() {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    this.initializeDarkPalette(prefersDark.matches);
+    prefersDark.addEventListener('change', (mediaQuery) =>
+      this.initializeDarkPalette(mediaQuery.matches));
+
+  }
 
   setOpen(isOpen: boolean) {
     this.isModalOpen = isOpen;
   }
 
-  protected readonly set = set;
+  initializeDarkPalette(isDark: boolean) {
+    this.paletteToggle = isDark;
+    this.toggleDarkPalette(isDark);
+  }
+
+  toggleChange(ev: { detail: { checked: boolean | undefined; }; }) {
+    this.toggleDarkPalette(ev.detail.checked);
+  }
+
+  toggleDarkPalette(shouldAdd: boolean | undefined) {
+    document.documentElement.classList.toggle('ion-palette-dark', shouldAdd);
+  }
+
 }
