@@ -10,4 +10,8 @@ export class HomePage {
   constructor() {}
 
   protected readonly console = console;
+
+  onEmergencyClick() {
+
+  }
 }

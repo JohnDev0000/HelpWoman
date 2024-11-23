@@ -9,6 +9,8 @@ export class ModalComponent {
   isModalOpen = false;
   paletteToggle = false;
 
+
+
   constructor() {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
     this.initializeDarkPalette(prefersDark.matches);
@@ -18,6 +20,7 @@ export class ModalComponent {
   }
 
   setOpen(isOpen: boolean) {
+    console.log('Modal open status:', isOpen);
     this.isModalOpen = isOpen;
   }
 
