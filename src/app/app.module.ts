@@ -10,7 +10,7 @@ import {provideHttpClient, withFetch, withInterceptorsFromDi} from "@angular/com
 import {HTTP} from "@awesome-cordova-plugins/http/ngx";
 import {HttpService} from "./services/http.service";
 import { AngularFireModule } from "@angular/fire/compat";
-import {firebaseConfig} from "../environments/environment";
+import {environment} from "../environments/environment";
 import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 
@@ -22,7 +22,7 @@ import {AngularFireAuthModule} from "@angular/fire/compat/auth";
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule
   ],
