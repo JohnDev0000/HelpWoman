@@ -12,7 +12,6 @@ export class FireserviceService {
 
   constructor(public auth: AngularFireAuth, public firestore: AngularFirestore) { }
 
-
   signup(data: { email: string; password: string; }) {
     return this.auth.createUserWithEmailAndPassword(data.email, data.password);
   }

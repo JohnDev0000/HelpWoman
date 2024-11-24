@@ -14,6 +14,7 @@ export interface User {
 })
 export class LoginPage implements OnInit {
   user = {} as User;
+  isUserLoggedIn = false;
 
   constructor(public fireService: FireserviceService, private router: Router) {
   }
@@ -27,11 +28,18 @@ export class LoginPage implements OnInit {
       if (result) {
         alert('Usuário logado com sucesso');
         await this.router.navigate(['/home']);
+        this.isUserLoggedIn = true;
       }
     } catch (e) {
       alert('Usuário ou senha inválidos');
       console.error(e);
     }
+  }
+
+  async logout() {
+    await this.fireService.auth.signOut();
+    this.isUserLoggedIn = false;
+    console.log('Usuário desconectado.');
   }
 
 }

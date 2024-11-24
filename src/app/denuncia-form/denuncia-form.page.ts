@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {AngularFirestore} from "@angular/fire/compat/firestore";
+import {AngularFireAuth} from "@angular/fire/compat/auth";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-denuncia-form',
@@ -7,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DenunciaFormPage {
 
-  form = {
+  formData = {
     nome: '',
     tipoViolencia: '',
     descricao: '',
@@ -15,21 +18,42 @@ export class DenunciaFormPage {
     local: '',
   };
 
-  constructor() {}
+  constructor(private auth: AngularFireAuth, private firestore: AngularFirestore, private router: Router) {}
 
-  submitForm() {
-    console.log('Formulário Enviado:', this.form);
+  async submitForm() {
+    try {
+      console.log('Formulário Enviado:', this.formData);
+      const user = await this.auth.currentUser;
 
-    // Limpa os campos após o envio
-    this.form = {
-      nome: '',
-      tipoViolencia: '',
-      descricao: '',
-      dataOcorrido: '',
-      local: '',
-    };
+      if (!user) {
+        alert('Você precisa estar logado para registrar uma denúncia.');
+        return;
+      }
 
-    // Aqui você pode implementar o envio para uma API ou exibir uma mensagem de sucesso
-    alert('Denúncia registrada com sucesso!');
+      const userId = user.uid;
+      await this.firestore.collection('denuncias').add({
+        ...this.formData,
+        userId,
+        timestamp: new Date(),
+      }).then(() => {
+        alert('Denúncia registrada com sucesso!');
+        this.formData = {
+          nome: '',
+          tipoViolencia: '',
+          descricao: '',
+          dataOcorrido: '',
+          local: '',
+        };
+        this.router.navigate(['/home']);
+      });
+
+      console.log('Denúncia registrada com sucesso!');
+
+    } catch (error) {
+      console.error('Erro ao registrar denúncia:', error);
+      alert('Erro ao registrar denúncia. Verifique os campos e tente novamente.');
+    }
   }
+
 }
+

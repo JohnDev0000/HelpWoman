@@ -18,7 +18,7 @@
   <ion-grid>
     <ion-row>
 
-      <ion-row class="ion-margin-top">
+      <ion-row class="ion-margin-top container">
         <h2 class="form-title">Registrar Denúncia</h2>
         <p class="form-subtitle">Preencha o formulário abaixo para informar o tipo de violência ou denúncia.</p>
       </ion-row>
@@ -31,7 +31,7 @@
             type="text"
             placeholder="Digite seu nome"
             required
-            [(ngModel)]="form.nome"
+            [(ngModel)]="formData.nome"
             name="nome">
           </ion-input>
         </ion-item>
@@ -40,7 +40,7 @@
           <ion-label position="stacked">Tipo de Violência</ion-label>
           <ion-select
             placeholder="Selecione"
-            [(ngModel)]="form.tipoViolencia"
+            [(ngModel)]="formData.tipoViolencia"
             name="tipoViolencia"
             required>
             <ion-select-option value="fisica">Física</ion-select-option>
@@ -55,7 +55,7 @@
           <ion-label position="stacked">Descrição</ion-label>
           <ion-textarea
             placeholder="Descreva o ocorrido"
-            [(ngModel)]="form.descricao"
+            [(ngModel)]="formData.descricao"
             name="descricao"
             required>
           </ion-textarea>
@@ -66,9 +66,10 @@
           <ion-datetime
             display-format="DD/MM/YYYY"
             placeholder="Selecione a data"
-            [(ngModel)]="form.dataOcorrido"
+            [(ngModel)]="formData.dataOcorrido"
             name="dataOcorrido"
-            required>
+            required
+            class="ion-padding">
           </ion-datetime>
         </ion-item>
 
@@ -77,7 +78,7 @@
           <ion-input
             type="text"
             placeholder="Ex.: Bairro ou Cidade"
-            [(ngModel)]="form.local"
+            [(ngModel)]="formData.local"
             name="local"
             required>
           </ion-input>
@@ -86,7 +87,8 @@
         <ion-button
           expand="block"
           type="submit"
-          [disabled]="!denunciaForm.form.valid">
+          [disabled]="!denunciaForm.form.valid"
+          style="--background: #8e44ad">
           Enviar Denúncia
         </ion-button>
 

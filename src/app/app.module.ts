@@ -11,7 +11,8 @@ import {HTTP} from "@awesome-cordova-plugins/http/ngx";
 import {HttpService} from "./services/http.service";
 import { AngularFireModule } from "@angular/fire/compat";
 import {firebaseConfig} from "../environments/environment";
-import {provideAuth} from "@angular/fire/auth";
+import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
+import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 
 
 
@@ -21,7 +22,9 @@ import {provideAuth} from "@angular/fire/auth";
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule,
+    AngularFireAuthModule
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),
