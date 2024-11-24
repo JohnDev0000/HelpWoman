@@ -22,7 +22,11 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./tabs/login/login.module').then( m => m.LoginPageModule)
+  },  {
+    path: 'denuncia-form',
+    loadChildren: () => import('./denuncia-form/denuncia-form.module').then( m => m.DenunciaFormPageModule)
   },
+
 ];
 
 @NgModule({

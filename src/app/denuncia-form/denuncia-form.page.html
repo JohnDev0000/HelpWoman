@@ -1,0 +1,96 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Formulário</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-icon name="home" slot="end" class="ion-padding" [routerLink]="['/home']"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Formulário</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid>
+    <ion-row>
+
+      <ion-row class="ion-margin-top">
+        <h2 class="form-title">Registrar Denúncia</h2>
+        <p class="form-subtitle">Preencha o formulário abaixo para informar o tipo de violência ou denúncia.</p>
+      </ion-row>
+
+      <form (ngSubmit)="submitForm()" #denunciaForm="ngForm">
+
+        <ion-item>
+          <ion-label position="stacked">Nome Completo</ion-label>
+          <ion-input
+            type="text"
+            placeholder="Digite seu nome"
+            required
+            [(ngModel)]="form.nome"
+            name="nome">
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Tipo de Violência</ion-label>
+          <ion-select
+            placeholder="Selecione"
+            [(ngModel)]="form.tipoViolencia"
+            name="tipoViolencia"
+            required>
+            <ion-select-option value="fisica">Física</ion-select-option>
+            <ion-select-option value="psicologica">Psicológica</ion-select-option>
+            <ion-select-option value="sexual">Sexual</ion-select-option>
+            <ion-select-option value="moral">Moral</ion-select-option>
+            <ion-select-option value="patrimonial">Patrimonial</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Descrição</ion-label>
+          <ion-textarea
+            placeholder="Descreva o ocorrido"
+            [(ngModel)]="form.descricao"
+            name="descricao"
+            required>
+          </ion-textarea>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Data do Ocorrido</ion-label>
+          <ion-datetime
+            display-format="DD/MM/YYYY"
+            placeholder="Selecione a data"
+            [(ngModel)]="form.dataOcorrido"
+            name="dataOcorrido"
+            required>
+          </ion-datetime>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Local do Ocorrido</ion-label>
+          <ion-input
+            type="text"
+            placeholder="Ex.: Bairro ou Cidade"
+            [(ngModel)]="form.local"
+            name="local"
+            required>
+          </ion-input>
+        </ion-item>
+
+        <ion-button
+          expand="block"
+          type="submit"
+          [disabled]="!denunciaForm.form.valid">
+          Enviar Denúncia
+        </ion-button>
+
+      </form>
+    </ion-row>
+  </ion-grid>
+</ion-content>
