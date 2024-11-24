@@ -12,6 +12,10 @@ export class HomePage {
   protected readonly console = console;
 
   onEmergencyClick() {
+    const message = encodeURIComponent('Socorro! Estou em perigo!');
+    const phoneNumber = '5521983700872';
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
 
+    window.open(whatsappURL, '_blank');
   }
 }
