@@ -1,6 +1,6 @@
 
 <ion-icon name="menu" (click)="setOpen(true)" style="zoom:2.5"></ion-icon>
-<ion-modal id="menuModal" [isOpen]="isModalOpen">
+<ion-modal id="menuModal" [isOpen]="isModalOpen" (didDismiss)="setOpen(false)">
   <ng-template>
 
     <ion-header>
@@ -26,7 +26,7 @@
             {{ paletteToggle ? 'Modo Escuro' : 'Modo Claro' }}
           </span>
         </div>
-        <ion-toggle [(ngModel)]="paletteToggle" (ionChange)="toggleChange($event)" class="custom-toggle"></ion-toggle>
+        <ion-toggle [(ngModel)]="paletteToggle" (ngModelChange)="toggleDarkPalette($event)" class="custom-toggle"></ion-toggle>
       </div>
 
 

@@ -9,14 +9,23 @@ export class ModalComponent {
   isModalOpen = false;
   paletteToggle = false;
 
-
-
   constructor() {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-    this.initializeDarkPalette(prefersDark.matches);
-    prefersDark.addEventListener('change', (mediaQuery) =>
-      this.initializeDarkPalette(mediaQuery.matches));
+    this.setupTheme();
+  }
 
+  setupTheme() {
+    const savedTheme = localStorage.getItem('theme');
+
+    if (savedTheme) {
+      this.initializeDarkPalette(savedTheme === 'dark');
+    } else {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+      this.initializeDarkPalette(prefersDark.matches);
+
+      prefersDark.addEventListener('change', (mediaQuery) =>
+        this.initializeDarkPalette(mediaQuery.matches)
+      );
+    }
   }
 
   setOpen(isOpen: boolean) {
@@ -29,12 +38,10 @@ export class ModalComponent {
     this.toggleDarkPalette(isDark);
   }
 
-  toggleChange(ev: { detail: { checked: boolean | undefined; }; }) {
-    this.toggleDarkPalette(ev.detail.checked);
-  }
-
   toggleDarkPalette(shouldAdd: boolean | undefined) {
     document.documentElement.classList.toggle('ion-palette-dark', shouldAdd);
+
+    localStorage.setItem('theme', shouldAdd ? 'dark' : 'light');
   }
 
 }
