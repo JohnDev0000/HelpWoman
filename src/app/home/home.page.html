@@ -1,11 +1,22 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Página Inicial
-    </ion-title>
+    <div class="row">
+      <div class="col-6 align-content-center">
+        <ion-title>
+          Página Inicial
+        </ion-title>
+      </div>
 
-    <div slot="end" class="ion-padding">
-      <app-modal></app-modal>
+      <div class="col-4 align-content-center">
+        <ion-item routerLink="/user-profile">
+          <ion-icon name="person-circle"></ion-icon>
+          <ion-label>Perfil</ion-label>
+        </ion-item>
+      </div>
+
+      <div slot="end" class="col align-content-center">
+        <app-modal></app-modal>
+      </div>
     </div>
   </ion-toolbar>
 

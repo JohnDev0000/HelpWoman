@@ -26,6 +26,10 @@ const routes: Routes = [
     path: 'denuncia-form',
     loadChildren: () => import('./denuncia-form/denuncia-form.module').then( m => m.DenunciaFormPageModule)
   },
+  {
+    path: 'user-profile',
+    loadChildren: () => import('./Components/user-profile/user-profile.module').then( m => m.UserProfilePageModule)
+  },
 
 ];
 

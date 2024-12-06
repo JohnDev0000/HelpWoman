@@ -8,13 +8,10 @@ import {Router} from "@angular/router";
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
 })
-export class RegisterPage implements OnInit {
+export class RegisterPage {
   user = {} as User;
 
   constructor(public fireService: FireserviceService, private router: Router) { }
-
-  ngOnInit(){
-  }
 
   async register(user: User) {
     try {

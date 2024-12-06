@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {user} from "@angular/fire/auth";
+import {UserProfilePage} from "../Components/user-profile/user-profile.page";
 
 @Component({
   selector: 'app-home',
@@ -6,6 +8,8 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  user: any;
+
 
   constructor() {}
 
@@ -18,4 +22,6 @@ export class HomePage {
 
     window.open(whatsappURL, '_blank');
   }
+
+
 }

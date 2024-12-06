@@ -12,15 +12,13 @@ export interface User {
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
   user = {} as User;
   isUserLoggedIn = false;
 
   constructor(public fireService: FireserviceService, private router: Router) {
   }
 
-  ngOnInit() {
-  }
 
   async login(user: User) {
     try {
@@ -36,10 +34,5 @@ export class LoginPage implements OnInit {
     }
   }
 
-  async logout() {
-    await this.fireService.auth.signOut();
-    this.isUserLoggedIn = false;
-    console.log('Usuário desconectado.');
-  }
 
 }
